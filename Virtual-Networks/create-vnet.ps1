@@ -17,3 +17,8 @@ $location = "westeurope"
 $rgName = "{0}-{1}-{2}-{3}-{4}" -f $company, $product, $env, $instance, $region
 Write-Output "Creating Resource Group - $($rgName)"
 New-AzResourceGroup -Name $rgName -Location $location
+
+# Create a virtual network
+$vnetName = "{0}-VNT" -f $rgName
+$addrPrefix = "10.0.0.0/24"
+New-AzVirtualNetwork -ResourceGroupName $rgName -Name $vnetName -Location $location -AddressPrefix $addrPrefix
