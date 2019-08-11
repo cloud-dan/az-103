@@ -22,3 +22,6 @@ vnetName=$rgName-"VNT"
 addrPrefix="10.1.0.0/17"
 echo $vnetName
 az network vnet create --name $vnetName --resource-group $rgName --address-prefixes $addrPrefix
+
+# Get virtual network
+az network vnet show --resource-group $rgName --name $vnetName
