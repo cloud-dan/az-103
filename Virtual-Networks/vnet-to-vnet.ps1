@@ -118,4 +118,4 @@ New-AzVirtualNetworkGatewayConnection -Name $Connection41 -ResourceGroupName $RG
 ## Verify a connection ##
 #########################
 
-Get-AzVirtualNetworkGatewayConnection -Name VNet1toSite1 -ResourceGroupName TestRG1
+Get-AzVirtualNetworkGatewayConnection -Name VNet1toVNet4 -ResourceGroupName TestRG1
