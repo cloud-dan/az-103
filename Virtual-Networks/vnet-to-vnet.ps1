@@ -95,3 +95,27 @@ $gwipconf4 = New-AzVirtualNetworkGatewayIpConfig -Name $GWIPconfName4 -Subnet $s
 New-AzVirtualNetworkGateway -Name $GWName4 -ResourceGroupName $RG4 `
 -Location $Location4 -IpConfigurations $gwipconf4 -GatewayType Vpn `
 -VpnType RouteBased -GatewaySku VpnGw1
+
+############################
+## Create the connections ##
+############################
+
+# Get both virtual network gateways
+$vnet1gw = Get-AzVirtualNetworkGateway -Name $GWName1 -ResourceGroupName $RG1
+$vnet4gw = Get-AzVirtualNetworkGateway -Name $GWName4 -ResourceGroupName $RG4
+
+# Create the TestVNet1 to TestVNet4 connection.
+New-AzVirtualNetworkGatewayConnection -Name $Connection14 -ResourceGroupName $RG1 `
+-VirtualNetworkGateway1 $vnet1gw -VirtualNetworkGateway2 $vnet4gw -Location $Location1 `
+-ConnectionType Vnet2Vnet -SharedKey 'AzureA1b2C3'
+
+# Create the TestVNet4 to TestVNet1 connection
+New-AzVirtualNetworkGatewayConnection -Name $Connection41 -ResourceGroupName $RG4 `
+-VirtualNetworkGateway1 $vnet4gw -VirtualNetworkGateway2 $vnet1gw -Location $Location4 `
+-ConnectionType Vnet2Vnet -SharedKey 'AzureA1b2C3'
+
+#########################
+## Verify a connection ##
+#########################
+
+Get-AzVirtualNetworkGatewayConnection -Name VNet1toSite1 -ResourceGroupName TestRG1
