@@ -20,7 +20,7 @@ New-AzResourceGroup -Name $rgName -Location $location
 
 # Create a virtual network
 $vnetName = "{0}-VNT" -f $rgName
-$addrPrefix = "10.0.0.0/17"
+$addrPrefix = "10.0.0.0/16"
 New-AzVirtualNetwork -ResourceGroupName $rgName -Name $vnetName -Location $location -AddressPrefix $addrPrefix
 
 # Get virtual network
