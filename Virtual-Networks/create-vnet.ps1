@@ -24,4 +24,12 @@ $addrPrefix = "10.0.0.0/16"
 New-AzVirtualNetwork -ResourceGroupName $rgName -Name $vnetName -Location $location -AddressPrefix $addrPrefix
 
 # Get virtual network
-Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $rgName
+$virtualNetwork = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $rgName
+
+# Create subnet
+$subnetConfig = Add-AzVirtualNetworkSubnetConfig `
+    -Name app-subnet `
+    -AddressPrefix 10.0.0.0/24 `
+    -VirtualNetwork $virtualNetwork
+
+$virtualNetwork | Set-AzVirtualNetwork
